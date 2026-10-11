@@ -30,12 +30,15 @@ public class Main {
             System.out.println("\n======================================");
             System.out.println(" DATA STRUCTURE AND GRAPH ANALYZER");
             System.out.println("======================================");
+
             System.out.println("1. Array Operations");
             System.out.println("2. Stack Operations");
             System.out.println("3. Queue Operations");
             System.out.println("4. Linked List Operations");
             System.out.println("5. Graph Operations");
             System.out.println("6. Searching Algorithms");
+            System.out.println("7. Performance Comparison");
+            System.out.println("8. Display All Results");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
 
@@ -48,6 +51,8 @@ public class Main {
                 case 4 -> linkedListMenu();
                 case 5 -> graphMenu();
                 case 6 -> searchingMenu();
+                case 7 -> performanceComparisonMenu();
+                case 8 -> displayAllResults();
                 case 0 -> {
                     running = false;
                     System.out.println("Application closed.");
@@ -301,6 +306,74 @@ public class Main {
 
         System.out.println(
                 "Note: timings vary between runs and are not a benchmark.");
+    }
+
+    private static void performanceComparisonMenu() {
+        int[] values = array.getElements();
+
+        if (values.length == 0) {
+            System.out.println(
+                    "Insert values into the array before comparing searches.");
+            return;
+        }
+
+        System.out.println("\n--- PERFORMANCE COMPARISON ---");
+        System.out.println("Array: " + Arrays.toString(values));
+        System.out.print("Enter target value: ");
+
+        int target = readInt();
+
+        long start = System.nanoTime();
+        int linearResult = searching.linearSearch(values, target);
+        long linearTime = System.nanoTime() - start;
+
+        int[] sortedValues = Arrays.copyOf(values, values.length);
+        Arrays.sort(sortedValues);
+
+        start = System.nanoTime();
+        int binaryResult =
+                searching.binarySearch(sortedValues, target);
+        long binaryTime = System.nanoTime() - start;
+
+        System.out.println("\nAlgorithm          Result       Time (nanoseconds)");
+        System.out.println("--------------------------------------------------");
+        System.out.printf("%-19s %-12s %d%n",
+                "Linear Search",
+                linearResult >= 0 ? "Found" : "Not found",
+                linearTime);
+        System.out.printf("%-19s %-12s %d%n",
+                "Binary Search",
+                binaryResult >= 0 ? "Found" : "Not found",
+                binaryTime);
+
+        System.out.println("\nTime Complexity:");
+        System.out.println("Linear Search: O(n)");
+        System.out.println("Binary Search: O(log n), using sorted data.");
+        System.out.println(
+                "Note: Execution times vary between runs.");
+    }
+
+    private static void displayAllResults() {
+        System.out.println("\n======================================");
+        System.out.println("          ALL RESULTS");
+        System.out.println("======================================");
+
+        System.out.println("\n--- ARRAY ---");
+        array.display();
+
+        System.out.println("\n--- STACK ---");
+        stack.display();
+
+        System.out.println("\n--- QUEUE ---");
+        queue.display();
+
+        System.out.println("\n--- LINKED LIST ---");
+        linkedList.displayStudents();
+
+        System.out.println("\n--- GRAPH ---");
+        graph.displayGraph();
+        System.out.println("Vertices: " + graph.getVertexCount());
+        System.out.println("Edges: " + graph.getEdgeCount());
     }
 
     private static int readInt() {
