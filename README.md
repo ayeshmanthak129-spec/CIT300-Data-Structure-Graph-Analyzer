@@ -86,8 +86,6 @@ The project combines individual group members' contributions into an integrated 
 - Worked on graph display and graph traversal using BFS and DFS.
 - Contributed the graph module for integration into the application.
 
-*Note: The descriptions above summarize assigned responsibilities and the known project work. Each member should verify that their individual contribution description accurately reflects the work they personally completed.*
-
 ## 5. Performance Analysis and Time Complexity
 
 The following are the standard expected time complexities for the algorithms and data structures, subject to their specific implementations.
