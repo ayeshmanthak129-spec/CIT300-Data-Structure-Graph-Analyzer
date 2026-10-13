@@ -4,7 +4,6 @@ import analyzer.QueueOperations;
 import analyzer.SearchingOperations;
 import analyzer.StackOperations;
 import graph.CampusGraph;
-import linkedlist.StudentLinkedList;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -18,8 +17,8 @@ public class Main {
     private static final QueueOperations queue = new QueueOperations();
     private static final SearchingOperations searching =
             new SearchingOperations();
-    private static final StudentLinkedList linkedList =
-            new StudentLinkedList();
+    private static final LinkedListOperations linkedList =
+            new LinkedListOperations();
     private static final CampusGraph graph = new CampusGraph();
 
     public static void main(String[] args) {
@@ -165,39 +164,32 @@ public class Main {
 
         while (running) {
             System.out.println("\n--- LINKED LIST OPERATIONS ---");
-            System.out.println("1. Insert Student");
-            System.out.println("2. Search Student");
-            System.out.println("3. Delete Student");
-            System.out.println("4. Display Students");
-            System.out.println("5. Count Students");
+            System.out.println("1. Insert Node");
+            System.out.println("2. Delete Node");
+            System.out.println("3. Search Node");
+            System.out.println("4. Display Linked List");
+            System.out.println("5. Check if Empty");
             System.out.println("0. Back to Main Menu");
             System.out.print("Choice: ");
 
             switch (readInt()) {
                 case 1 -> {
-                    System.out.print("Enter student ID: ");
-                    int id = readInt();
-                    System.out.print("Enter student name: ");
-                    String name = scanner.nextLine().trim();
-
-                    if (id <= 0 || name.isEmpty()) {
-                        System.out.println(
-                                "Enter a positive ID and a valid name.");
-                    } else {
-                        linkedList.insertStudent(id, name);
-                    }
+                    System.out.print("Enter value to insert: ");
+                    linkedList.insert(readInt());
                 }
                 case 2 -> {
-                    System.out.print("Enter student ID: ");
-                    linkedList.searchStudent(readInt());
+                    System.out.print("Enter value to delete: ");
+                    linkedList.delete(readInt());
                 }
                 case 3 -> {
-                    System.out.print("Enter student ID: ");
-                    linkedList.deleteStudent(readInt());
+                    System.out.print("Enter value to search: ");
+                    linkedList.search(readInt());
                 }
-                case 4 -> linkedList.displayStudents();
+                case 4 -> linkedList.display();
                 case 5 -> System.out.println(
-                        "Total students: " + linkedList.getSize());
+                        linkedList.isEmpty()
+                                ? "Linked List is empty."
+                                : "Linked List is not empty.");
                 case 0 -> running = false;
                 default -> System.out.println("Invalid choice.");
             }
@@ -368,7 +360,7 @@ public class Main {
         queue.display();
 
         System.out.println("\n--- LINKED LIST ---");
-        linkedList.displayStudents();
+        linkedList.display();
 
         System.out.println("\n--- GRAPH ---");
         graph.displayGraph();
